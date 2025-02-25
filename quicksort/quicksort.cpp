@@ -5,41 +5,27 @@ using namespace std;
 int n;
 vector <double> arr;
 
-int partition(int low, int high) {
+int part(int low, int high) {
 
-    // Choose the pivot
     double pivot = arr[low + rand() % (high-low+1)];
-
-    // Index of smaller element and indicates
-    // the right position of pivot found so far
     int i = low - 1;
-
-    // Traverse arr[low..high] and move all smaller
-    // elements on left side. Elements from low to
-    // i are smaller after every iteration
     for (int j = low; j <= high - 1; j++) {
         if (arr[j] < pivot) {
             i++;
             swap(arr[i], arr[j]);
         }
     }
-
-    // Move pivot after smaller elements and
-    // return its position
     swap(arr[i + 1], arr[high]);
     return i + 1;
 }
 
-// The QuickSort function implementation
 void quickSort(int low, int high) {
 
     if (low < high) {
 
-        // pi is the partition return index of pivot
-        int pi = partition(low, high);
+        int pi = part(low, high);
 
-        // Recursion calls for smaller elements
-        // and greater or equals elements
+
         quickSort(low, pi - 1);
         quickSort(pi + 1, high);
     }
@@ -74,9 +60,9 @@ int main() {
         for (int i = 0 ; i < n ; i++)
             filein >> arr[i];
 
-        clock_t start = clock(); // Bắt đầu đo
+        clock_t start = clock(); 
         quickSort(0, n - 1);
-        clock_t end = clock(); // Kết thúc đo
+        clock_t end = clock(); 
         double duration = double(end - start) / CLOCKS_PER_SEC;
         report << "test" << numtest+1 << ":    " << duration << "\n";
         res += duration;

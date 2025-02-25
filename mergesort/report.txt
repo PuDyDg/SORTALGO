@@ -1,11 +1,11 @@
-test1:    0.372
-test2:    0.361
-test3:    0.493
-test4:    0.487
-test5:    0.487
-test6:    0.478
-test7:    0.503
-test8:    0.494
-test9:    0.498
-test10:    0.493
-0.4666
+test1:    0.37
+test2:    0.359
+test3:    0.5
+test4:    0.482
+test5:    0.483
+test6:    0.49
+test7:    0.491
+test8:    0.486
+test9:    0.49
+test10:    0.49
+0.4641
