@@ -5,7 +5,7 @@ using namespace std;
 int n;
 vector <double> arr;
 
-void heapify(int n, int i){
+void heap(int n, int i){
 
     int largest = i;
     int l = 2 * i + 1;
@@ -19,7 +19,7 @@ void heapify(int n, int i){
 
     if (largest != i) {
         swap(arr[i], arr[largest]);
-        heapify(n, largest);
+        heap(n, largest);
     }
 }
 
@@ -27,11 +27,11 @@ void heapSort(){
     int n = arr.size();
 
     for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(n, i);
+        heap(n, i);
 
     for (int i = n - 1; i > 0; i--) {
         swap(arr[0], arr[i]);
-        heapify(i, 0);
+        heap(i, 0);
     }
 }
 int main() {
