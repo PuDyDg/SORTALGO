@@ -2,82 +2,86 @@
 #include <ctime>
 
 using namespace std;
-int n;
-vector <double> arr;
 
-void heap(int n, int i){
+vector<double> arr;
 
-    int largest = i;
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
+void siftDown(int start, int end) {
+    int root = start;
 
-    if (l < n && arr[l] > arr[largest])
-        largest = l;
+    while (2 * root + 1 <= end) {
+        int child = 2 * root + 1;
+        int swapIdx = root;
 
-    if (r < n && arr[r] > arr[largest])
-        largest = r;
+        if (arr[swapIdx] < arr[child])
+            swapIdx = child;
 
-    if (largest != i) {
-        swap(arr[i], arr[largest]);
-        heap(n, largest);
+        if (child + 1 <= end && arr[swapIdx] < arr[child + 1])
+            swapIdx = child + 1;
+
+        if (swapIdx == root)
+            return;
+        else {
+            swap(arr[root], arr[swapIdx]);
+            root = swapIdx;
+        }
     }
 }
 
-void heapSort(){
+void heapSort() {
     int n = arr.size();
 
-    for (int i = n / 2 - 1; i >= 0; i--)
-        heap(n, i);
+    for (int start = n / 2 - 1; start >= 0; start--)
+        siftDown(start, n - 1);
 
-    for (int i = n - 1; i > 0; i--) {
-        swap(arr[0], arr[i]);
-        heap(i, 0);
+    for (int end = n - 1; end > 0; end--) {
+        swap(arr[0], arr[end]);
+        siftDown(0, end - 1);
     }
 }
+
 int main() {
-
-
     ios_base::sync_with_stdio(0);
-    cin.tie(0);cout.tie(0);
-    vector <string> testnames;
+    cin.tie(0); cout.tie(0);
+    vector<string> testnames;
 
-    for (int numtest = 0 ; numtest <= 9 ; numtest++) {
-        string tmp;
-        tmp += (numtest + '0');
-        testnames.push_back(tmp);
+    for (int numtest = 0; numtest <= 9; numtest++) {
+        testnames.push_back(to_string(numtest));
     }
+
     ofstream report("report.txt");
+    double totalDuration = 0;
 
-    double res = 0;
-
-    for (int numtest = 0 ; numtest <= 9 ; numtest++) {
+    for (int numtest = 0; numtest <= 9; numtest++) {
         const string input = testnames[numtest] + ".inp";
         const string output = testnames[numtest] + ".out";
         ifstream filein(input);
         ofstream fileout(output);
 
-
+        int n;
         filein >> n;
         arr.resize(n);
 
-        for (int i = 0 ; i < n ; i++)
+        for (int i = 0; i < n; i++)
             filein >> arr[i];
 
-        clock_t start = clock(); 
+        clock_t start = clock();
         heapSort();
-        clock_t end = clock(); 
+        clock_t end = clock();
         double duration = double(end - start) / CLOCKS_PER_SEC;
-        report << "test" << numtest+1 << ":    " << duration << "\n";
-        res += duration;
-        for (int i = 0; i < n; i++) {
-            fileout << arr[i] << " ";
+        report << "test" << numtest + 1 << ":    " << duration << "\n";
+        totalDuration += duration;
+
+        for (const auto& val : arr) {
+            fileout << val << " ";
         }
+
         filein.close();
         fileout.close();
-
     }
-    res /= 10;
-    report << res;
+
+    totalDuration /= 10;
+    report << "Average duration: " << totalDuration << "\n";
     report.close();
+
     return 0;
 }

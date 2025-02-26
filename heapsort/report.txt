@@ -1,11 +1,11 @@
-test1:    0.35
-test2:    0.355
-test3:    0.574
-test4:    0.551
-test5:    0.559
-test6:    0.543
-test7:    0.538
-test8:    0.5
-test9:    0.513
-test10:    0.515
-0.4998
+test1:    0.306
+test2:    0.322
+test3:    0.438
+test4:    0.454
+test5:    0.453
+test6:    0.441
+test7:    0.467
+test8:    0.446
+test9:    0.452
+test10:    0.438
+Average duration: 0.4217
