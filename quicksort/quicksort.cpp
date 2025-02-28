@@ -8,6 +8,7 @@ vector <double> arr;
 int part(int low, int high) {
 
     double pivot = arr[low + rand() % (high-low+1)];
+    swap(arr[pivot], arr[high]);
     int i = low - 1;
     for (int j = low; j <= high - 1; j++) {
         if (arr[j] < pivot) {
