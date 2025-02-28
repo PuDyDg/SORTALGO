@@ -6,7 +6,7 @@ int n;
 vector <double> arr;
 
 int part(int low, int high) {
-    pivot_id = low + rand() % (high-low+1);
+    int pivot_id = low + rand() % (high-low+1);
     double pivot = arr[pivot_id];
     swap(arr[pivot_id], arr[high]);
     int i = low - 1;
